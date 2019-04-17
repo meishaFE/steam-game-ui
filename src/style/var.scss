@@ -1,0 +1,43 @@
+/* BEM
+ -------------------------- */
+$namespace: 'st';
+$element-separator: '__';
+$modifier-separator: '--';
+$state-prefix: 'is-';
+
+/* Header
+ -------------------------- */
+$header-height: 0.54rem;
+
+/* Button
+ -------------------------- */
+$--button-height: .5rem !default;
+$--button-font-size: .2rem !default;
+$--button-border-radius: .04rem !default;
+$--button-border: .02rem solid #000 !default;
+$--button-padding-horizontal: .4rem !default;
+$--button-fill: #FFE456 !default;
+$--button-shadow: inset -4px -4px 0 0 rgba(224,141,32,0.50), inset 4px 4px 0 0 rgba(255,255,255,0.60);
+$--button-color: #000000 !default;
+
+$--button-primary-fill: #4411C3;
+$--button-primary-shadow: inset -4px -4px 0 0 rgba(36, 0, 127, 0.6), inset 4px 4px 0 0 rgba(118, 68, 243, 0.6);
+$--button-primary-color: #FFE456;
+
+$--button-medium-height: .36rem !default;
+$--button-medium-font-size: .16rem !default;
+$--button-medium-padding-horizontal: .18rem !default;
+
+$--button-small-height: .32rem !default;
+$--button-small-font-size: .14rem !default;
+$--button-small-padding-horizontal: .21rem !default;
+
+$--button-mini-height: .28rem !default;
+$--button-mini-font-size: .13rem !default;
+$--button-mini-padding-horizontal: .21rem !default;
+
+
+
+
+
+
