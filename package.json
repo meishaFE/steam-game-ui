@@ -47,5 +47,9 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/meishaFE/steam-game-ui.git"
+  },
+  "engines": {
+    "node": ">= 9.0.0",
+    "npm": ">= 6.0.0"
   }
 }
