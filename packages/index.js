@@ -1,9 +1,12 @@
 import Header from 'packages/header/index.js';
 import Button from 'packages/button/index.js';
+import Icon from 'packages/icon/index.js';
+import 'src/style/icon.scss';
 
 const components = [
   Header,
-  Button
+  Button,
+  Icon
 ];
 
 const install = function(Vue, opts = {}) {

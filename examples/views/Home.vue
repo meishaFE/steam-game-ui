@@ -15,6 +15,11 @@
       <st-button type="primary" size="small">按钮</st-button>
       <st-button type="primary" size="mini">按钮</st-button>
     </div>
+    <i class="st-icon-loading"></i>
+    <i class="st-icon-wrong"></i>
+    <i class="st-icon-error"></i>
+    <i class="st-icon-right"></i>
+    <i class="st-icon-success"></i>
   </div>
 </template>
 
