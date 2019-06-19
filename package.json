@@ -1,6 +1,6 @@
 {
   "name": "steam-game-ui",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "A Component Library for Meisha SteamGame",
   "main": "lib/steam-game-ui.umd.min.js",
   "keywords": [
