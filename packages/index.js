@@ -1,10 +1,8 @@
-import Header from 'packages/header/index.js';
 import Button from 'packages/button/index.js';
 import Icon from 'packages/icon/index.js';
 import 'src/style/icon.scss';
 
 const components = [
-  Header,
   Button,
   Icon
 ];
@@ -22,6 +20,5 @@ if (typeof window !== 'undefined' && window.Vue) {
 export default {
   version: '0.1.0',
   install,
-  Header,
   Button
 };
