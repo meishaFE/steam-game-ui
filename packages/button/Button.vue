@@ -13,6 +13,7 @@
       `st-button__shadow--${type}-${size}`
     ]"
   >
+    <i class="st-icon-loading" v-if="loading"></i>
     <span v-if="$slots.default">
       <slot></slot>
     </span>
@@ -59,6 +60,12 @@ export default {
 
   &:hover {
     opacity: 0.8;
+  }
+
+  & [class*="st-icon-"] {
+    & + span {
+      margin-left: .04rem;
+    }
   }
 
   @include m(primary) {
@@ -136,6 +143,12 @@ export default {
   @include when(disabled) {
     opacity: 0.6;
     cursor: not-allowed;
+  }
+
+  @include when(loading) {
+    cursor: progress;
+    opacity: 0.6;
+    position: relative;
   }
 }
 </style>
