@@ -44,19 +44,57 @@
       <div><i class="st-icon-right"></i> Right</div>
       <div><i class="st-icon-success"></i> Success</div>
     </section>
+    <section class="demo__loading">
+      <h1>Loading</h1>
+      <h2>v-loading指令调用</h2>
+      <div style="width: 2rem;" v-stloading="loadingFlag">
+        <p>加载区加载区加载区加载区加载区加载区</p>
+        <p>加载区加载区加载区加载区加载区加载区</p>
+        <p>加载区加载区加载区加载区加载区加载区</p>
+      </div>
+      <st-button size="mini" @click="loadingFlag = !loadingFlag;">指令方式</st-button>
+      <h2>自定义loading文案，spinner类名，背景颜色</h2>
+      <div
+        style="width: 2rem;"
+        st-loading-text="对的"
+        st-loading-spinner="st-icon-right"
+        st-loading-background="rgba(255, 255, 255, 0.2)"
+        v-stloading="true">
+        <p>加载区加载区加载区加载区加载区加载区</p>
+        <p>加载区加载区加载区加载区加载区加载区</p>
+        <p>加载区加载区加载区加载区加载区加载区</p>
+      </div>
+    </section>
   </div>
 </template>
 
-<style lang="scss" scoped>
+<script>
+export default {
+  data() {
+    return {
+      loadingFlag: false
+    };
+  },
+  methods: {
+  }
+};
+</script>
+
+<style lang="scss">
+html {
+  background-color: #555EFB;
+}
 .demo {
-  width: 800px;
+  max-width: 10rem;
+  padding: .1rem;
   margin: 0 auto;
   margin: 0 auto;
   font-size: 16px;
+  background-color: #5131EF;
   section {
     margin-top: 20px;
     padding: 10px;
-    border-bottom: 2px solid grey;
+    border-bottom: 2px solid #4411C3;
     h1 {
       font-weight: 500;
       font-size: 30px;

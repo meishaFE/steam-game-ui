@@ -1,0 +1,77 @@
+/* eslint-disable */
+import Vue from 'vue';
+import Loading from './loading.vue';
+import { addClass, removeClass, getStyle } from 'src/utils/dom';
+const Mask = Vue.extend(Loading);
+
+const loadingDirective = {};
+loadingDirective.install = Vue => {
+  const toggleLoading = (el, binding) => {
+    if (binding.value) {
+      let wrapPosition = getStyle(el, 'position');
+      if (wrapPosition != 'absolute' && wrapPosition !== 'fixed') {
+        addClass(el, 'st-loading-parent--relative');
+      }
+      !binding.modifiers.unlock && addClass(el, 'st-loading-parent--hidden');
+      Vue.nextTick(() => {
+        const { width, height } = el.getBoundingClientRect();
+        const rootFontSize = parseFloat(document.documentElement.style['font-size']) || 1;
+        const maskStyle = {
+          top: el.scrollTop + 'px',
+          left: el.scrollLeft + 'px',
+          width: width / rootFontSize + 'rem',
+          height: height / rootFontSize + 'rem'
+        }
+        Object.keys(maskStyle).forEach(property => {
+          el.mask.style[property] = maskStyle[property];
+        });
+        el.maskStyle = maskStyle;
+        el.instance.visible = true;
+        el.appendChild(el.mask);
+      })
+    } else {
+      removeClass(el, 'st-loading-parent--relative');
+      removeClass(el, 'st-loading-parent--hidden');
+      el.instance.visible = false;
+    }
+  }
+  Vue.directive('stloading', {
+    bind: function(el, binding, vnode) {
+      const textExr = el.getAttribute('st-loading-text');
+      const spinnerExr = el.getAttribute('st-loading-spinner');
+      const backgroundExr = el.getAttribute('st-loading-background');
+      const customClassExr = el.getAttribute('st-loading-custom-class');
+      const vm = vnode.context;
+      const mask = new Mask({
+        el: document.createElement('div'),
+        data: {
+          text: vm && vm[textExr] || textExr,
+          spinner: vm && vm[spinnerExr] || spinnerExr,
+          background: vm && vm[backgroundExr] || backgroundExr,
+          customClass: vm && vm[customClassExr] || customClassExr,
+        }
+      })
+      el.instance = mask;
+      el.mask = mask.$el;
+      binding.value && toggleLoading(el, binding);
+    },
+
+    update: function(el, binding) {
+      el.instance.setText(el.getAttribute('st-loading-text'));
+      if (binding.oldValue !== binding.value) {
+        toggleLoading(el, binding);
+      }
+    },
+
+    unbind: function(el, binding) {
+      if (el.domInserted) {
+        el.mask &&
+        el.mask.parentNode &&
+        el.mask.parentNode.removeChild(el.mask);
+        toggleLoading(el, { value: false, modifiers: binding.modifiers });
+      }
+      el.instance && el.instance.$destroy();
+    }
+  });
+};
+export default loadingDirective;

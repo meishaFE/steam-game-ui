@@ -1,5 +1,6 @@
 import Button from 'packages/button/index.js';
 import Icon from 'packages/icon/index.js';
+import Loading from 'packages/loading/index.js';
 import 'src/style/icon.scss';
 
 const components = [
@@ -11,6 +12,7 @@ const install = function(Vue, opts = {}) {
   components.forEach(component => {
     Vue.component(component.name, component);
   });
+  Vue.use(Loading.directive);
 };
 
 if (typeof window !== 'undefined' && window.Vue) {
@@ -20,5 +22,6 @@ if (typeof window !== 'undefined' && window.Vue) {
 export default {
   version: '0.1.0',
   install,
-  Button
+  Button,
+  Loading
 };
