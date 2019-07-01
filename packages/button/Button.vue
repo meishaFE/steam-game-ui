@@ -66,7 +66,7 @@ export default {
 
   & [class*="st-icon-"] {
     position: absolute;
-    margin-left: -0.25rem;
+    margin-left: -0.15rem;
   }
 
   @include m(primary) {
@@ -78,12 +78,18 @@ export default {
     min-height: $--button-height;
     padding: 0 $--button-padding-horizontal;
     font-size: $--button-font-size;
+    & [class*="st-icon-"] {
+      margin-left: -0.25rem;
+    }
   }
 
   @include m(medium) {
     min-height: $--button-medium-height;
     padding: 0 $--button-medium-padding-horizontal;
     font-size: $--button-medium-font-size;
+    & [class*="st-icon-"] {
+      margin-left: -0.17rem;
+    }
   }
 
   @include m(small) {
