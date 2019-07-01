@@ -1,7 +1,7 @@
 <template>
   <div
     v-show="visible"
-    class="st-loading__mask"
+    :class="['st-loading__mask', customClass]"
     :style="{
       backgroundColor: background || ''
     }"
@@ -56,7 +56,7 @@
     color: mix(#fff, transparent, 70);
     text-align: center;
     user-select: none;
-    font-size: .15rem;
+    font-size: .2rem;
   }
   @include e(text) {
     font-size: 12px;
