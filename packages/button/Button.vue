@@ -56,6 +56,8 @@ export default {
   border-radius: $--button-border-radius;
   border: $--button-border;
   overflow: hidden;
+  line-height: 1;
+  vertical-align: middle;
   cursor: pointer;
 
   &:hover {
@@ -63,9 +65,8 @@ export default {
   }
 
   & [class*="st-icon-"] {
-    & + span {
-      margin-left: .04rem;
-    }
+    position: absolute;
+    margin-left: -0.25rem;
   }
 
   @include m(primary) {
@@ -74,68 +75,56 @@ export default {
   }
 
   @include m(large) {
-    height: $--button-height;
+    min-height: $--button-height;
     padding: 0 $--button-padding-horizontal;
     font-size: $--button-font-size;
-    line-height: $--button-height;
   }
 
   @include m(medium) {
-    height: $--button-medium-height;
+    min-height: $--button-medium-height;
     padding: 0 $--button-medium-padding-horizontal;
     font-size: $--button-medium-font-size;
-    line-height: $--button-medium-height;
   }
 
   @include m(small) {
-    height: $--button-small-height;
+    min-height: $--button-small-height;
     padding: 0 $--button-small-padding-horizontal;
     font-size: $--button-small-font-size;
-    line-height: $--button-small-height;
   }
 
   @include m(mini) {
-    height: $--button-mini-height;
+    min-height: $--button-mini-height;
     padding: 0 $--button-mini-padding-horizontal;
     font-size: $--button-mini-font-size;
-    line-height: $--button-mini-height;
   }
 
   @include e(shadow) {
     &--default {
       &-large {
         box-shadow: inset -4px -4px 0 0 rgba(224,141,32,0.50), inset 4px 4px 0 0 rgba(255,255,255,0.60);
-        line-height: calc(#{$--button-height} - 4px);
       }
       &-medium {
         box-shadow: inset -3px -3px 0 0 rgba(224,141,32,0.50), inset 3px 3px 0 0 rgba(255,255,255,0.60);
-        line-height: calc(#{$--button-medium-height} - 3px);
       }
       &-small {
         box-shadow: inset -2px -2px 0 0 rgba(224,141,32,0.50), inset 2px 2px 0 0 rgba(255,255,255,0.60);
-        line-height: calc(#{$--button-small-height} - 2px);
       }
       &-mini {
         box-shadow: inset -1px -1px 0 0 rgba(224,141,32,0.50), inset 1px 1px 0 0 rgba(255,255,255,0.60);
-        line-height: calc(#{$--button-mini-height} - 1px);
       }
     }
     &--primary {
       &-large {
         box-shadow: inset -4px -4px 0 0 rgba(36, 0, 127, 0.6), inset 4px 4px 0 0 rgba(118, 68, 243, 0.6);
-        line-height: calc(#{$--button-height} - 4px);
       }
       &-medium {
         box-shadow: inset -3px -3px 0 0 rgba(36, 0, 127, 0.6), inset 3px 3px 0 0 rgba(118, 68, 243, 0.6);
-        line-height: calc(#{$--button-medium-height} - 3px);
       }
       &-small {
         box-shadow: inset -2px -2px 0 0 rgba(36, 0, 127, 0.6), inset 2px 2px 0 0 rgba(118, 68, 243, 0.6);
-        line-height: calc(#{$--button-small-height} - 2px);
       }
       &-mini {
         box-shadow: inset -1px -1px 0 0 rgba(36, 0, 127, 0.6), inset 1px 1px 0 0 rgba(118, 68, 243, 0.6);
-        line-height: calc(#{$--button-mini-height} - 1px);
       }
     }
   }
