@@ -1,6 +1,7 @@
 import Button from 'packages/button/index.js';
 import Icon from 'packages/icon/index.js';
 import Loading from 'packages/loading/index.js';
+import Message from 'packages/message/index.js';
 import 'src/style/icon.scss';
 
 const components = [
@@ -8,11 +9,12 @@ const components = [
   Icon
 ];
 
-const install = function(Vue, opts = {}) {
+const install = function (Vue, opts = {}) {
   components.forEach(component => {
     Vue.component(component.name, component);
   });
   Vue.use(Loading.directive);
+  Vue.prototype.$message = Message;
 };
 
 if (typeof window !== 'undefined' && window.Vue) {
@@ -23,5 +25,6 @@ export default {
   version: '0.1.0',
   install,
   Button,
-  Loading
+  Loading,
+  Message
 };

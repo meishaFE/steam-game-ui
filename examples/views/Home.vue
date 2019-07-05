@@ -4,19 +4,19 @@
       <h1>Button</h1>
       <div>
         <h2>不同按钮</h2>
-        <st-button >默认按钮</st-button>
+        <st-button>默认按钮</st-button>
         <st-button type="primary">主要按钮</st-button>
       </div>
       <div>
         <h2>不同大小</h2>
         <div>
-          <st-button >默认大小</st-button>
+          <st-button>默认大小</st-button>
           <st-button size="medium">中等按钮</st-button>
           <st-button size="small">小型按钮</st-button>
           <st-button size="mini">超小按钮</st-button>
         </div>
         <div>
-          <st-button type="primary" >默认大小</st-button>
+          <st-button type="primary">默认大小</st-button>
           <st-button type="primary" size="medium">中等按钮</st-button>
           <st-button type="primary" size="small">小型按钮</st-button>
           <st-button type="primary" size="mini">超小按钮</st-button>
@@ -38,11 +38,21 @@
     </section>
     <section class="demo__icon">
       <h1>Icon</h1>
-      <div><i class="st-icon-loading"></i> Loading</div>
-      <div><i class="st-icon-wrong"></i> Wrong</div>
-      <div><i class="st-icon-error"></i> Error</div>
-      <div><i class="st-icon-right"></i> Right</div>
-      <div><i class="st-icon-success"></i> Success</div>
+      <div>
+        <i class="st-icon-loading"></i>Loading
+      </div>
+      <div>
+        <i class="st-icon-wrong"></i>Wrong
+      </div>
+      <div>
+        <i class="st-icon-error"></i>Error
+      </div>
+      <div>
+        <i class="st-icon-right"></i>Right
+      </div>
+      <div>
+        <i class="st-icon-success"></i>Success
+      </div>
     </section>
     <section class="demo__loading">
       <h1>Loading</h1>
@@ -59,11 +69,21 @@
         st-loading-text="对的"
         st-loading-spinner="st-icon-right"
         st-loading-background="rgba(255, 255, 255, 0.2)"
-        v-stloading="true">
+        v-stloading="true"
+      >
         <p>加载区加载区加载区加载区加载区加载区</p>
         <p>加载区加载区加载区加载区加载区加载区</p>
         <p>加载区加载区加载区加载区加载区加载区</p>
       </div>
+    </section>
+    <section class="demo__message">
+      <h1>Message</h1>
+      <st-button @click="showMessage">正常的</st-button>
+      <st-button @click="showErrorMessage">错误的</st-button>
+      <st-button @click="showSuccessMessage">正确的</st-button>
+      <st-button @click="showLoadingMessage">加载中</st-button>
+      <st-button @click="showCbMessage">可回调</st-button>
+      <st-button @click="showAlawaysMessage">一直在</st-button>
     </section>
   </div>
 </template>
@@ -72,29 +92,59 @@
 export default {
   data() {
     return {
-      loadingFlag: false
+      loadingFlag: false,
+      nowMessage: null
     };
   },
   methods: {
+    showMessage() {
+      this.$message({ content: '这是正常的' });
+    },
+    showErrorMessage() {
+      this.$message.error({ content: '竟然失败了' });
+    },
+    showSuccessMessage() {
+      this.$message.success({ content: '居然成功了' });
+    },
+    showLoadingMessage() {
+      this.$message.loading({ content: '真慢啊' });
+    },
+    showCbMessage() {
+      this.$message({
+        content: '这是正常的',
+        cb: () => {
+          this.$message({ content: '我是回调啊', type: 'success' });
+        }
+      });
+    },
+    showAlawaysMessage() {
+      this.nowMessage = this.$message.loading({
+        content: '我会一直在的哦，直到你点击关闭',
+        duration: 0
+      });
+      setTimeout(() => {
+        this.nowMessage.close();
+      }, 6000);
+    }
   }
 };
 </script>
 
 <style lang="scss">
 html {
-  background-color: #555EFB;
+  background-color: #555efb;
 }
 .demo {
   max-width: 10rem;
-  padding: .1rem;
+  padding: 0.1rem;
   margin: 0 auto;
   margin: 0 auto;
   font-size: 16px;
-  background-color: #5131EF;
+  background-color: #5131ef;
   section {
     margin-top: 20px;
     padding: 10px;
-    border-bottom: 2px solid #4411C3;
+    border-bottom: 2px solid #4411c3;
     h1 {
       font-weight: 500;
       font-size: 30px;
@@ -112,7 +162,7 @@ html {
   &__icon {
     div {
       color: #606266;
-      font-size: .2rem;
+      font-size: 0.2rem;
     }
   }
 }
