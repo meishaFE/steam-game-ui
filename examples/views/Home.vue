@@ -85,6 +85,10 @@
       <st-button @click="showCbMessage">可回调</st-button>
       <st-button @click="showAlawaysMessage">一直在</st-button>
     </section>
+    <section class="demo__clickoutside">
+      <h1>Clickoutside</h1>
+      <p v-clickoutside="clickOut" @click="clickIn">{{clickText}}</p>
+    </section>
   </div>
 </template>
 
@@ -93,7 +97,8 @@ export default {
   data() {
     return {
       loadingFlag: false,
-      nowMessage: null
+      nowMessage: null,
+      clickText: '初始'
     };
   },
   methods: {
@@ -125,6 +130,12 @@ export default {
       setTimeout(() => {
         this.nowMessage.close();
       }, 6000);
+    },
+    clickOut() {
+      this.clickText = '点到外面啦';
+    },
+    clickIn() {
+      this.clickText = '点在里面';
     }
   }
 };
@@ -163,6 +174,15 @@ html {
     div {
       color: #606266;
       font-size: 0.2rem;
+    }
+  }
+  &__clickoutside {
+    p {
+      width: 100px;
+      height: 50px;
+      line-height: 50px;
+      background: #fff;
+      text-align: center;
     }
   }
 }

@@ -2,6 +2,8 @@ import Button from 'packages/button/index.js';
 import Icon from 'packages/icon/index.js';
 import Loading from 'packages/loading/index.js';
 import Message from 'packages/message/index.js';
+import Clickoutside from 'packages/clickoutside/index.js';
+
 import 'src/style/icon.scss';
 
 const components = [
@@ -14,6 +16,7 @@ const install = function (Vue, opts = {}) {
     Vue.component(component.name, component);
   });
   Vue.use(Loading.directive);
+  Vue.directive('clickoutside', Clickoutside);
   Vue.prototype.$message = Message;
 };
 
