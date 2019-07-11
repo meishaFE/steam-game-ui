@@ -1,4 +1,56 @@
-# loading
+# Loading 加载
+加载，可通过指令和服务调用
+
+## v-stloading
+使用v-stloading指令调用
+:::demo
+
+```html
+<template>
+  <div>
+    <div v-stloading="loadingFlag">
+      <p>窗前明月光 窗前明月光 窗前明月光 窗前明月光 窗前明月光 窗前明月光 窗前明月光 窗前明月光<p>
+      <p>疑是地上霜 疑是地上霜 疑是地上霜 疑是地上霜 疑是地上霜 疑是地上霜 疑是地上霜 疑是地上霜<p>
+      <p>举头望明月 举头望明月 举头望明月 举头望明月 举头望明月 举头望明月 举头望明月 举头望明月<p>
+      <p>低头思故乡 低头思故乡 低头思故乡 低头思故乡 低头思故乡 低头思故乡 低头思故乡 低头思故乡<p>
+    </div>
+    <st-button size="mini" @click="loadingFlag = !loadingFlag;">点我调用</st-button>
+  </div>
+</template>
+<script>
+  export default {
+    data() {
+      return {
+        loadingFlag: false
+      }
+    }
+  }
+</script>
+```
+
+:::
+
+## 自定义样式
+自定义loading文案，spinner类名，背景颜色
+:::demo
+
+```html
+<template>
+  <div
+    st-loading-text="我是提示"
+    st-loading-spinner="st-icon-right"
+    st-loading-background="rgba(248, 214, 29, 0.3)"
+    v-stloading="true">
+    <p>窗前明月光 窗前明月光 窗前明月光 窗前明月光 窗前明月光 窗前明月光 窗前明月光 窗前明月光<p>
+    <p>疑是地上霜 疑是地上霜 疑是地上霜 疑是地上霜 疑是地上霜 疑是地上霜 疑是地上霜 疑是地上霜<p>
+    <p>举头望明月 举头望明月 举头望明月 举头望明月 举头望明月 举头望明月 举头望明月 举头望明月<p>
+    <p>低头思故乡 低头思故乡 低头思故乡 低头思故乡 低头思故乡 低头思故乡 低头思故乡 低头思故乡<p>
+  </div>
+</template>
+```
+
+:::
+
 
 ## Attribute
 |参数|说明|类型|可选值|默认值|
@@ -10,7 +62,7 @@
 |customClass|Loading 的自定义类名|string|-|-|
 
 ## TODO
-
+- [ ] 服务方式
 - [ ] 完善文档
 - [ ] 单元测试
 
