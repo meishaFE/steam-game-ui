@@ -7,6 +7,7 @@ module.exports = {
   lintOnSave: 'error',
   productionSourceMap: false,
   parallel: false,
+  publicPath: '/steam-game-ui/',
   pages: {
     index: {
       entry: 'examples/main.js',
