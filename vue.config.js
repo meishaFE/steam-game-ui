@@ -1,10 +1,12 @@
 // https://cli.vuejs.org/zh/config/#vue-config-js
 const path = require('path');
+const markdownConfig = require('./build/markdown.config');
 
 module.exports = {
   runtimeCompiler: true,
   lintOnSave: 'error',
   productionSourceMap: false,
+  parallel: false,
   pages: {
     index: {
       entry: 'examples/main.js',
@@ -31,6 +33,9 @@ module.exports = {
       .loader('babel-loader')
       .tap(options => {
         return options;
-      });
+      })
+      .end();
+
+    markdownConfig(config);
   }
 };

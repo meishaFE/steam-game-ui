@@ -1,4 +1,7 @@
 language: node_js
+env:
+  global:
+    - GH_REF: github.com/meishaFE/steam-game-ui.git
 cache:
   directories:
     - ~/.npm
@@ -9,3 +12,10 @@ install:
   - npm install
 script:
   - npm run test
+  - npm run build
+after_script:
+  - cd ./dist
+  - git init
+  - git add .
+  - git commit -m "Travis CI Auto Builder"
+  - git push --force --quiet "https://${TOKEN_AARON}@${GH_REF}" master:gh-pages

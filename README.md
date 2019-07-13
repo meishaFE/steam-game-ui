@@ -22,8 +22,6 @@ Vue.use(SteamUI);
 
 
 ## Documentation
-* [Usage Guide](docs/guide.md)
-
 
 
 ## Development
