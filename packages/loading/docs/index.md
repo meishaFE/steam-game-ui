@@ -14,7 +14,8 @@
       <p>举头望明月 举头望明月 举头望明月 举头望明月 举头望明月 举头望明月 举头望明月 举头望明月<p>
       <p>低头思故乡 低头思故乡 低头思故乡 低头思故乡 低头思故乡 低头思故乡 低头思故乡 低头思故乡<p>
     </div>
-    <st-button size="mini" @click="loadingFlag = !loadingFlag;">点我调用</st-button>
+    <st-button size="mini" @click="loadingFlag = !loadingFlag;">通过指令调用</st-button>
+    <st-button size="mini" @click="toLoading">通过服务调用</st-button>
   </div>
 </template>
 <script>
@@ -22,6 +23,12 @@
     data() {
       return {
         loadingFlag: false
+      }
+    },
+    methods: {
+      toLoading() {
+        console.log(111, this.$loading)
+        this.$loading = true;
       }
     }
   }
