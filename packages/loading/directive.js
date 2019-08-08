@@ -14,13 +14,11 @@ loadingDirective.install = Vue => {
       }
       !binding.modifiers.unlock && addClass(el, 'st-loading-parent--hidden');
       Vue.nextTick(() => {
-        const { width, height } = el.getBoundingClientRect();
-        const rootFontSize = parseFloat(document.documentElement.style['font-size']) || 1;
         const maskStyle = {
-          top: el.scrollTop + 'px',
-          left: el.scrollLeft + 'px',
-          width: width / rootFontSize + 'rem',
-          height: height / rootFontSize + 'rem'
+          top: 0,
+          left: 0,
+          bottom: 0,
+          right: 0
         }
         Object.keys(maskStyle).forEach(property => {
           el.mask.style[property] = maskStyle[property];
