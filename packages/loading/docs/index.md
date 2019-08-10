@@ -14,21 +14,55 @@
       <p>举头望明月 举头望明月 举头望明月 举头望明月 举头望明月 举头望明月 举头望明月 举头望明月<p>
       <p>低头思故乡 低头思故乡 低头思故乡 低头思故乡 低头思故乡 低头思故乡 低头思故乡 低头思故乡<p>
     </div>
-    <st-button size="mini" @click="loadingFlag = !loadingFlag;">通过指令调用</st-button>
-    <st-button size="mini" @click="toLoading">通过服务调用</st-button>
+    <st-button size="mini" @click="loadingFlag = !loadingFlag">通过指令调用</st-button>
   </div>
 </template>
 <script>
   export default {
+    name: 'demo2',
+    data() {
+      return {
+        loadingFlag: false
+      }
+    }
+  }
+</script>
+```
+:::
+
+## 全屏loading
+使用指令加`.fullscreen`修饰符调用，或者使用服务方式
+:::demo
+
+```html
+<template>
+  <div>
+    <st-button size="mini" v-stloading.fullscreen="loadingFlag" @click="openByDirective">通过指令调用</st-button>
+    <st-button size="mini" @click="openByService">通过服务调用</st-button>
+  </div>
+</template>
+<script>
+  export default {
+    name: 'demo1',
     data() {
       return {
         loadingFlag: false
       }
     },
     methods: {
-      toLoading() {
-        console.log(111, this.$loading)
-        this.$loading = true;
+      openByDirective() {
+        this.loadingFlag = true;
+        setTimeout(() => {
+          this.loadingFlag = false;
+        }, 2000);
+      },
+      openByService() {
+        let loading = this.$loading({
+          text: '2s后关闭'
+        });
+        setTimeout(() => {
+          loading.close();
+        }, 2000);
       }
     }
   }
@@ -67,9 +101,9 @@
 |spinner|自定义加载图标类名|string|-|-|
 |background|遮罩背景色|string|-|-|
 |customClass|Loading 的自定义类名|string|-|-|
+|fullscreen|设置该loading为全屏loading，同`v-loading`指令中的`fullscreen`修饰符|boolean|-|false|
 
 ## TODO
-- [ ] 服务方式
 - [ ] 完善文档
 - [ ] 单元测试
 

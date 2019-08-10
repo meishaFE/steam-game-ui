@@ -7,13 +7,13 @@ const Mask = Vue.extend(Loading);
 const loadingDirective = {};
 loadingDirective.install = Vue => {
   const toggleLoading = (el, binding) => {
+    let parent = binding.modifiers.fullscreen ? document.body : el;
     if (binding.value) {
-      let wrapPosition = getStyle(el, 'position');
-      if (wrapPosition != 'absolute' && wrapPosition !== 'fixed') {
-        addClass(el, 'st-loading-parent--relative');
-      }
-      !binding.modifiers.unlock && addClass(el, 'st-loading-parent--hidden');
       Vue.nextTick(() => {
+        let wrapPosition = getStyle(parent, 'position');
+        if (wrapPosition != 'absolute' && wrapPosition !== 'fixed') {
+          addClass(parent, 'st-loading-parent--relative');
+        }
         const maskStyle = {
           top: 0,
           left: 0,
@@ -25,11 +25,11 @@ loadingDirective.install = Vue => {
         });
         el.maskStyle = maskStyle;
         el.instance.visible = true;
-        el.appendChild(el.mask);
+        parent.appendChild(el.mask);
       })
     } else {
-      removeClass(el, 'st-loading-parent--relative');
-      removeClass(el, 'st-loading-parent--hidden');
+      removeClass(parent, 'st-loading-parent--relative');
+      removeClass(parent, 'st-loading-parent--hidden');
       el.instance.visible = false;
     }
   }
