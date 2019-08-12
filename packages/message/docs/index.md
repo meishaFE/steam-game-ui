@@ -1,8 +1,8 @@
 # Message 消息提示
 消息提示
 
-## v-stloading
-使用v-stloading指令调用
+## 服务方式调用$message
+
 :::demo
 
 ```html

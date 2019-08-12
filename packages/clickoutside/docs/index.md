@@ -1,4 +1,3 @@
-      
 # Click outside
 
 ## 基本用法

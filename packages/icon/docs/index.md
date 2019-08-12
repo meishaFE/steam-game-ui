@@ -7,11 +7,13 @@
 
 ```html
 <template>
-  <div><i class="st-icon-loading"></i> Loading</div>
-  <div><i class="st-icon-wrong"></i> Wrong</div>
-  <div><i class="st-icon-error"></i> Error</div>
-  <div><i class="st-icon-right"></i> Right</div>
-  <div><i class="st-icon-success"></i> Success</div>
+  <div>
+    <div><i class="st-icon-loading"></i> Loading</div>
+    <div><i class="st-icon-wrong"></i> Wrong</div>
+    <div><i class="st-icon-error"></i> Error</div>
+    <div><i class="st-icon-right"></i> Right</div>
+    <div><i class="st-icon-success"></i> Success</div>
+  </div>
 </template>
 ```
 

@@ -1,6 +1,5 @@
 // https://cli.vuejs.org/zh/config/#vue-config-js
 const path = require('path');
-const markdownConfig = require('./build/markdown.config');
 
 module.exports = {
   runtimeCompiler: true,
@@ -37,6 +36,21 @@ module.exports = {
       })
       .end();
 
-    markdownConfig(config);
+    config.module
+      .rule('md')
+      .test(/\.md/)
+      .use('vue-loader')
+      .loader('vue-loader')
+      .options({
+        compilerOptions: {
+          preserveWhitespace: false
+        }
+      })
+      .end()
+      .use('markdown-loader')
+      .loader(
+        require('path').resolve(__dirname, './build/markdown-loader.js')
+      )
+      .end();
   }
 };

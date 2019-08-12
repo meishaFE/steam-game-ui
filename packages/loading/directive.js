@@ -7,31 +7,29 @@ const Mask = Vue.extend(Loading);
 const loadingDirective = {};
 loadingDirective.install = Vue => {
   const toggleLoading = (el, binding) => {
+    let parent = binding.modifiers.fullscreen ? document.body : el;
     if (binding.value) {
-      let wrapPosition = getStyle(el, 'position');
-      if (wrapPosition != 'absolute' && wrapPosition !== 'fixed') {
-        addClass(el, 'st-loading-parent--relative');
-      }
-      !binding.modifiers.unlock && addClass(el, 'st-loading-parent--hidden');
       Vue.nextTick(() => {
-        const { width, height } = el.getBoundingClientRect();
-        const rootFontSize = parseFloat(document.documentElement.style['font-size']) || 1;
+        let wrapPosition = getStyle(parent, 'position');
+        if (wrapPosition != 'absolute' && wrapPosition !== 'fixed') {
+          addClass(parent, 'st-loading-parent--relative');
+        }
         const maskStyle = {
-          top: el.scrollTop + 'px',
-          left: el.scrollLeft + 'px',
-          width: width / rootFontSize + 'rem',
-          height: height / rootFontSize + 'rem'
+          top: 0,
+          left: 0,
+          bottom: 0,
+          right: 0
         }
         Object.keys(maskStyle).forEach(property => {
           el.mask.style[property] = maskStyle[property];
         });
         el.maskStyle = maskStyle;
         el.instance.visible = true;
-        el.appendChild(el.mask);
+        parent.appendChild(el.mask);
       })
     } else {
-      removeClass(el, 'st-loading-parent--relative');
-      removeClass(el, 'st-loading-parent--hidden');
+      removeClass(parent, 'st-loading-parent--relative');
+      removeClass(parent, 'st-loading-parent--hidden');
       el.instance.visible = false;
     }
   }

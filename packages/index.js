@@ -18,6 +18,7 @@ const install = function (Vue, opts = {}) {
   Vue.use(Loading.directive);
   Vue.directive('clickoutside', Clickoutside);
   Vue.prototype.$message = Message;
+  Vue.prototype.$loading = Loading.service;
 };
 
 if (typeof window !== 'undefined' && window.Vue) {
@@ -25,7 +26,7 @@ if (typeof window !== 'undefined' && window.Vue) {
 }
 
 export default {
-  version: '0.1.0',
+  version: require('./../package.json').version,
   install,
   Button,
   Loading,

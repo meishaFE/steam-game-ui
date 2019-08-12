@@ -17,6 +17,8 @@
 </template>
 
 <script>
+import SteamUI from 'packages/index.js';
+
 export default {
   name: 'CodeBlock',
   props: {
@@ -40,13 +42,12 @@ export default {
     goCodepen() {
       // https://blog.codepen.io/documentation/api/prefill
       const { js, html, css } = this.codepen;
-      let version = '0.1.13';
       const resourcesTpl =
         '<scr' +
         'ipt src="//unpkg.com/vue/dist/vue.js"></scr' +
         'ipt>' +
         '\n<scr' +
-        `ipt src="//unpkg.com/steam-game-ui@${version}/lib/steam-game-ui.umd.min.js"></scr` +
+        `ipt src="//unpkg.com/steam-game-ui@${SteamUI.version}/lib/steam-game-ui.umd.min.js"></scr` +
         'ipt>';
       let jsTpl = (js || '').replace(/export default/, 'var Main =').trim();
       let htmlTpl = `${resourcesTpl}\n<div id="app">\n${html.trim()}\n</div>`;
