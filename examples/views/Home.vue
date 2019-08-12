@@ -7,11 +7,11 @@
     </header>
     <div class="home__container">
       <div class="home__container-left">
-        <div class="home__routebtn" @click="$router.push({ name: 'Icon' })">Icon 图标</div>
-        <div class="home__routebtn" @click="$router.push({ name: 'Button' })">Button 按钮</div>
-        <div class="home__routebtn" @click="$router.push({ name: 'Loading' })">Loading 加载</div>
-        <div class="home__routebtn" @click="$router.push({ name: 'Message' })">Message 消息提示</div>
-        <div class="home__routebtn" @click="$router.push({ name: 'Clickoutside' })">Click Outside</div>
+        <div class="home__routebtn"><router-link to="/icon">Icon 图标</router-link></div>
+        <div class="home__routebtn"><router-link to="/button">Button 按钮</router-link></div>
+        <div class="home__routebtn"><router-link to="/loading">Loading 加载</router-link></div>
+        <div class="home__routebtn"><router-link to="/message">Message 消息提示</router-link></div>
+        <div class="home__routebtn"><router-link to="/clickoutside">Click Outside</router-link></div>
       </div>
       <div class="home__container-right" :class="$route.name == 'home' && 'no-design'">
         <div>
@@ -72,6 +72,9 @@ export default {
     &:hover {
       font-weight: bold;
       animation: shake 0.3s ease;
+    }
+    a {
+      color: #000;
     }
   }
   &__container-right {

@@ -19,23 +19,23 @@ export default new Router({
       component: Home,
       children: [{
         name: 'Button',
-        path: 'button',
+        path: '/button',
         component: button
       }, {
         name: 'Icon',
-        path: 'icon',
+        path: '/icon',
         component: icon
       }, {
         name: 'Loading',
-        path: 'loading',
+        path: '/loading',
         component: loading
       }, {
         name: 'Message',
-        path: 'message',
+        path: '/message',
         component: message
       }, {
         name: 'Clickoutside',
-        path: 'clickoutside',
+        path: '/clickoutside',
         component: clickoutside
       }]
     }

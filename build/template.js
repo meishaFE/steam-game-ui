@@ -1,11 +1,4 @@
-/*
- * @Description: markdown to Vue
- * @Author: Aaron
- * @Date: 2019-08-10 23:45:55
- * @LastEditTime: 2019-08-12 22:52:04
- */
-
-const md = require('markdown-it');
+const MarkdownIt = require('markdown-it');
 const MarkdownItContainer = require('markdown-it-container');
 const VueTemplateComplier = require('vue-template-compiler');
 const hljs = require('highlight.js');
@@ -15,7 +8,9 @@ module.exports = function(source) {
   // 需要解析成vue代码块集合
   const componentCodeList = [];
   let styleCodeList = [];
-  const markdownIt = md({
+  // 初始还MarkdownIt用于转换md文件为html
+  const markdownIt = MarkdownIt({
+    // 将markdown中的代码块用hljs高亮显示
     highlight: function(str, lang) {
       if (lang && hljs.getLanguage(lang)) {
         return `<pre class="hljs"><code>${
@@ -27,47 +22,34 @@ module.exports = function(source) {
       )}</code></pre>`;
     }
   });
-  // 使用【markdown-it-container】插件解析【:::demo :::】代码块为vue渲染
-  markdownIt.use(MarkdownItContainer, 'demo', {
-    // 验证代码块为【:::demo :::】才进行渲染
+  // 使用【markdown-it-container】插件解析【:::snippet :::】代码块为vue渲染
+  markdownIt.use(MarkdownItContainer, 'snippet', {
+    // 验证代码块为【:::snippet :::】才进行渲染
     validate(params) {
-      return params.trim().match(/^demo\s*(.*)$/);
+      return params.trim().match(/^snippet\s*(.*)$/);
     },
     // 代码块渲染
     render(tokens, index) {
       const token = tokens[index];
-      const tokenInfo = token.info.trim().match(/^demo\s*(.*)$/);
+      const tokenInfo = token.info.trim().match(/^snippet\s*(.*)$/);
       if (token.nesting === 1) {
-        // 获取demo的第一行代码描述，即::: demo xxx 中的xxx
+        // 获取snippet第一行的表述内容
         const desc = tokenInfo && tokenInfo.length > 1 ? tokenInfo[1] : '';
-
-        // 获取demo中需要渲染的内容
+        // 获取vue组件示例的代码
         const nextIndex = tokens[index + 1];
         const content = nextIndex.type === 'fence' ? nextIndex.content : '';
-
-        // 将content解析为vue组件基本属性对象
+        // 将content解析为vue组件基本属性对象;
         let { template, script, styles } = parse({
           source: content,
           compiler: VueTemplateComplier,
           needMap: false
         });
-
-        // 将content的内容分别提炼出来并转码，给codepen作为提交表单使用
-        let rawCodepen = {
-          html: (template && template.content || '').replace(/^(\/|\n)*/g, ''),
-          js: (script && script.content || '').replace(/^(\/|\n)*/g, ''),
-          css: (styles && styles.content || '').replace(/^(\/|\n)*/g, '')
-        };
-        let codepen = markdownIt.utils.escapeHtml(JSON.stringify(rawCodepen));
-
-        // 将template转为render函数
+        styleCodeList = styleCodeList.concat(styles);
+        // 将template的转为render函数
         const { code } = compileTemplate({
           source: template.content,
           compiler: VueTemplateComplier
         });
-
-        styleCodeList = styleCodeList.concat(styles);
-
         // 获取script的代码
         script = script ? script.content : '';
         if (script) {
@@ -78,9 +60,9 @@ module.exports = function(source) {
         } else {
           script = 'const exportJavaScript = {} ;';
         }
-
-        // 将代码解析成vue组件存储，然后在渲染html中引用该组件
-        const name = `st-demo-${componentCodeList.length}`;
+        // 代码块解析将需要解析vue组件的存储，渲染html用组件名称替代
+        const name = `kv-snippent-${componentCodeList.length}`;
+        // 渲染组件代码添加到数据集合
         componentCodeList.push(`"${name}":(function () {
           ${code}
           ${script}
@@ -90,40 +72,26 @@ module.exports = function(source) {
              staticRenderFns
           }
         })()`);
-
-        // 将需要渲染的示例用code-block组件包裹替换插槽显示示例效果
-        return `<code-block :codepen="${codepen}">
+        // 将需要渲染的示例用kv-code-snippet组件包裹替换插槽显示示例效果
+        return `<kv-code-snippet>
                   <div slot="desc">${markdownIt.render(desc)}</div>
-                  <template slot="demo"><${name} /></template>
+                  <${name} slot="source" />
                   <div slot="code">`;
       }
-                  return `    </div>
-                </code-block> `;
+      return `    </div>
+                </kv-code-snippet> `;
     }
   });
-
-  markdownIt.renderer.rules.table_open = function() {
-    return '<table class="st-doc__table">';
-  };
-
-  function genInlineLabel (render) {
-    return function() {
-      return render.apply(this, arguments)
-        .replace('{{', '{ { ')
-        .replace('}}', ' } }');
-    };
-  }
-  markdownIt.renderer.rules.fence = genInlineLabel(markdownIt.renderer.rules.fence);
-
+  // 将所有转换好的代码字符串拼接成vue单组件template、script、style格式
   return `
         <template>
-          <div class="st-doc">
+          <div class="kv-snippet-doc">
             ${markdownIt.render(source)}
           </div>
         </template>
         <script>
            export default {
-           name: 'st-doc',
+           name: 'kv-component-doc',
            components: {
             ${componentCodeList.join(',')}
            }

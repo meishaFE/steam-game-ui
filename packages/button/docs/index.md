@@ -7,8 +7,10 @@
 
 ```html
 <template>
+<div>
   <st-button>默认按钮</st-button>
   <st-button type="primary">主要按钮</st-button>
+</div>
 </template>
 ```
 
@@ -20,6 +22,7 @@
 
 ```html
 <template>
+<div>
   <div>
     <st-button>默认状态</st-button>
     <st-button disabled>禁用状态</st-button>
@@ -30,6 +33,7 @@
     <st-button type="primary" disabled>禁用状态</st-button>
     <st-button type="primary" loading>加载状态</st-button>
   </div>
+</div>
 </template>
 ```
 
@@ -42,6 +46,7 @@
 
 ```html
 <template>
+<div>
   <div>
     <st-button>默认大小</st-button>
     <st-button size="medium">中等按钮</st-button>
@@ -54,6 +59,7 @@
     <st-button type="primary" size="small">小型按钮</st-button>
     <st-button type="primary" size="mini">超小按钮</st-button>
   </div>
+</div>
 </template>
 ```
 
