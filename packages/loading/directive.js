@@ -33,7 +33,7 @@ loadingDirective.install = Vue => {
       el.instance.visible = false;
     }
   }
-  Vue.directive('stloading', {
+  Vue.directive('loading', {
     bind: function(el, binding, vnode) {
       const textExr = el.getAttribute('st-loading-text');
       const spinnerExr = el.getAttribute('st-loading-spinner');
