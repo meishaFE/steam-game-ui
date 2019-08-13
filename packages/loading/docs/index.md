@@ -1,14 +1,14 @@
 # Loading 加载
 加载，可通过指令和服务调用
 
-## v-stloading
+## v-loading
 使用v-stloading指令调用
 :::demo
 
 ```html
 <template>
   <div>
-    <div v-stloading="loadingFlag">
+    <div v-loading="loadingFlag">
       <p>床前明月光 床前明月光 床前明月光 床前明月光 床前明月光 床前明月光 床前明月光 床前明月光</p>
       <p>疑是地上霜 疑是地上霜 疑是地上霜 疑是地上霜 疑是地上霜 疑是地上霜 疑是地上霜 疑是地上霜</p>
       <p>举头望明月 举头望明月 举头望明月 举头望明月 举头望明月 举头望明月 举头望明月 举头望明月</p>
@@ -36,7 +36,7 @@
 ```html
 <template>
   <div>
-    <st-button size="mini" v-stloading.fullscreen="loadingFlag" @click="openByDirective">通过指令调用</st-button>
+    <st-button size="mini" v-loading.fullscreen="loadingFlag" @click="openByDirective">通过指令调用</st-button>
     <st-button size="mini" @click="openByService">通过服务调用</st-button>
   </div>
 </template>
@@ -78,7 +78,7 @@
     st-loading-text="我是提示"
     st-loading-spinner="st-icon-right"
     st-loading-background="rgba(248, 214, 29, 0.3)"
-    v-stloading="true">
+    v-loading="true">
     <p>床前明月光 床前明月光 床前明月光 床前明月光 床前明月光 床前明月光 床前明月光 床前明月光</p>
     <p>疑是地上霜 疑是地上霜 疑是地上霜 疑是地上霜 疑是地上霜 疑是地上霜 疑是地上霜 疑是地上霜</p>
     <p>举头望明月 举头望明月 举头望明月 举头望明月 举头望明月 举头望明月 举头望明月 举头望明月</p>

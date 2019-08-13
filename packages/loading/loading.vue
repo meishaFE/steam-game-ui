@@ -16,7 +16,7 @@
 
 <script>
   export default {
-    name: 'StLoading',
+    name: 'Loading',
     data () {
       return {
         text: '',
