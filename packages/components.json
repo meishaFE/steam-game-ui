@@ -1,7 +1,0 @@
-{
-	"button": "packages/button/index.js",
-	"icon": "packages/icon/index.js",
-	"loading": "packages/loading/index.js",
-	"message": "packages/message/index.js",
-	"clickoutside": "packages/clickoutside/index.js"
-}
