@@ -21,7 +21,8 @@ module.exports = {
     config.resolve.alias
       .set('@', path.resolve('examples'))
       .set('src', path.resolve('src'))
-      .set('packages', path.resolve('packages'));
+      .set('packages', path.resolve('packages'))
+      .set('examples', path.resolve('examples'));
 
     config.module
       .rule('js')

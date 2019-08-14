@@ -152,4 +152,11 @@ export default {
 .no-design {
   background: url('./../assets/img/bg.png') no-repeat center center;
 }
+code.hljs {
+  display: inline;
+}
+
+pre code.hljs {
+  display: block;
+}
 </style>

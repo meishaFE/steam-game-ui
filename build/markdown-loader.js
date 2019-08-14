@@ -1,10 +1,3 @@
-/*
- * @Description: markdown to Vue
- * @Author: Aaron
- * @Date: 2019-08-10 23:45:55
- * @LastEditTime: 2019-08-12 22:52:04
- */
-
 const md = require('markdown-it');
 const MarkdownItContainer = require('markdown-it-container');
 const VueTemplateComplier = require('vue-template-compiler');
@@ -114,6 +107,15 @@ module.exports = function(source) {
     };
   }
   markdownIt.renderer.rules.fence = genInlineLabel(markdownIt.renderer.rules.fence);
+
+  // function hlInLineCode (render) {
+  //   return function() {
+  //     return render.apply(this, arguments)
+  //       .replace('<code v-pre', '<code v-pre class="hljs" ')
+  //       .replace('<code>', '<code class="hljs">');
+  //   };
+  // }
+  // markdownIt.renderer.rules.code_inline = hlInLineCode(markdownIt.renderer.rules.code_inline);
 
   return `
         <template>

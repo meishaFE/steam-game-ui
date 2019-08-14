@@ -2,9 +2,13 @@
 	"guide": {
 		"name": "开发指南",
 		"children": [{
-			"name": "快速上手"
+			"name": "快速上手",
+			"path": "/quickstart",
+			"docsPath": "examples/guide/quickstart.md"
 		}, {
-			"name": "参与开发"
+			"name": "参与开发",
+			"path": "/develop",
+			"docsPath": "examples/guide/develop.md"
 		}]
 	},
 	"components": {

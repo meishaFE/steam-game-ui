@@ -5,23 +5,26 @@ import Home from './views/Home.vue';
 
 Vue.use(Router);
 
-let navs;
-const context = require.context('./../packages/', true, /\.md/);
-const contextKeys = context.keys();
+let navs = [];
+const componentsContext = require.context('./../packages/', true, /\.md/);
+const componentsContextKeys = componentsContext.keys();
+const guideContext = require.context('./../examples/', true, /\.md/);
+const guideContextKeys = guideContext.keys();
 
 Object.keys(navConfig).forEach(group => {
-  navs = navConfig[group].children.reduce((results, nav) => {
+  navConfig[group].children.forEach(nav => {
     if (nav.path && nav.docsPath) {
-      let docsPath = nav.docsPath.replace('packages', '.');
-      if (contextKeys.indexOf(docsPath) > -1) {
-        results.push({
+      let docsPath = nav.docsPath.replace(/examples|packages/, '.');
+      let isGuide = guideContextKeys.indexOf(docsPath) > -1;
+      let isComponent = componentsContextKeys.indexOf(docsPath) > -1;
+      if (isGuide || isComponent) {
+        navs.push({
           path: nav.path,
-          component: context(docsPath).default
+          component: isGuide ? guideContext(docsPath).default : componentsContext(docsPath).default
         });
       }
     }
-    return results;
-  }, []);
+  });
 });
 
 let router = {
