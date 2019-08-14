@@ -1,0 +1,36 @@
+{
+	"guide": {
+		"name": "开发指南",
+		"children": [{
+			"name": "快速上手"
+		}, {
+			"name": "参与开发"
+		}]
+	},
+	"components": {
+		"name": "组件",
+		"children": [
+			{
+				"name": "Icon 图标",
+				"path": "/icon",
+				"docsPath": "packages/icon/docs/index.md"
+			}, {
+				"name": "Button 按钮",
+				"path": "/button",
+				"docsPath": "packages/button/docs/index.md"
+			}, {
+				"name": "Loading 加载",
+				"path": "/loading",
+				"docsPath": "packages/loading/docs/index.md"
+			}, {
+				"name": "Message 消息提示",
+				"path": "/message",
+				"docsPath": "packages/message/docs/index.md"
+			}, {
+				"name": "Click Outside",
+				"path": "/clickoutside",
+				"docsPath": "packages/clickoutside/docs/index.md"
+			}
+		]
+	}
+}
