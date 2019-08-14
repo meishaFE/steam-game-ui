@@ -7,11 +7,9 @@
     </header>
     <div class="home__container">
       <div class="home__container-left">
-        <div class="home__routebtn"><router-link to="/icon">Icon 图标</router-link></div>
-        <div class="home__routebtn"><router-link to="/button">Button 按钮</router-link></div>
-        <div class="home__routebtn"><router-link to="/loading">Loading 加载</router-link></div>
-        <div class="home__routebtn"><router-link to="/message">Message 消息提示</router-link></div>
-        <div class="home__routebtn"><router-link to="/clickoutside">Click Outside</router-link></div>
+        <div class="home__routebtn" v-for="(nav, idx) in navs" :key="idx">
+          <router-link :to="nav.path">{{nav.name}}</router-link>
+        </div>
       </div>
       <div class="home__container-right" :class="$route.name == 'home' && 'no-design'">
         <div>
@@ -24,12 +22,28 @@
 
 <script>
 import Corner from './githubCorner';
+import Navs from './../nav.config.json';
 export default {
   name: 'Home',
   data() {
-    return {};
+    return {
+      navs: []
+    };
   },
-  methods: {},
+  created () {
+    this.extractNav();
+  },
+  methods: {
+    extractNav() {
+      Object.keys(Navs).forEach(key => {
+        Navs[key].children.forEach(nav => {
+          if (nav.name && nav.path && nav.docsPath) {
+            this.navs.push(nav);
+          }
+        });
+      });
+    }
+  },
   components: {
     Corner
   }
@@ -137,5 +151,12 @@ export default {
 }
 .no-design {
   background: url('./../assets/img/bg.png') no-repeat center center;
+}
+code.hljs {
+  display: inline;
+}
+
+pre code.hljs {
+  display: block;
 }
 </style>

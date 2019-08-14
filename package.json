@@ -14,11 +14,13 @@
   "private": false,
   "license": "MIT",
   "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint",
-    "test": "vue-cli-service test:unit",
-    "lib": "vue-cli-service build --target lib --name steam-game-ui --dest lib packages/index.js"
+    "new": "node build/new.js",
+    "serve": "npm run build:file && vue-cli-service serve",
+    "build": "npm run build:file && vue-cli-service build",
+    "lint": "npm run build:file && vue-cli-service lint",
+    "test": "npm run build:file && vue-cli-service test:unit",
+    "build:file": "node build/build-entry.js",
+    "lib": "npm run build:file && vue-cli-service build --target lib --name steam-game-ui --dest lib packages/index.js"
   },
   "dependencies": {
     "codesandbox": "^2.1.6",
@@ -39,7 +41,9 @@
     "cheerio": "^1.0.0-rc.3",
     "eslint": "^5.16.0",
     "eslint-plugin-vue": "^5.0.0",
+    "file-save": "^0.2.0",
     "highlight": "^0.2.4",
+    "json-templater": "^1.2.0",
     "markdown-it": "^9.0.0",
     "markdown-it-anchor": "^5.2.4",
     "markdown-it-container": "^2.0.0",
@@ -47,6 +51,7 @@
     "prettier": "^1.17.0",
     "sass-loader": "^7.1.0",
     "sinon": "^7.3.2",
+    "uppercamelcase": "^3.0.0",
     "vue-markdown-loader": "^2.4.1",
     "vue-template-compiler": "^2.5.21",
     "vuepress-plugin-demo-code": "^0.3.5"

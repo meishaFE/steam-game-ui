@@ -1,15 +1,33 @@
 import Vue from 'vue';
+import navConfig from './nav.config';
 import Router from 'vue-router';
 import Home from './views/Home.vue';
-import button from 'packages/button/docs/index.md';
-import icon from 'packages/icon/docs/index.md';
-import loading from 'packages/loading/docs/index.md';
-import message from 'packages/message/docs/index.md';
-import clickoutside from 'packages/clickoutside/docs/index.md';
 
 Vue.use(Router);
 
-export default new Router({
+let navs = [];
+const componentsContext = require.context('./../packages/', true, /\.md/);
+const componentsContextKeys = componentsContext.keys();
+const guideContext = require.context('./../examples/', true, /\.md/);
+const guideContextKeys = guideContext.keys();
+
+Object.keys(navConfig).forEach(group => {
+  navConfig[group].children.forEach(nav => {
+    if (nav.path && nav.docsPath) {
+      let docsPath = nav.docsPath.replace(/examples|packages/, '.');
+      let isGuide = guideContextKeys.indexOf(docsPath) > -1;
+      let isComponent = componentsContextKeys.indexOf(docsPath) > -1;
+      if (isGuide || isComponent) {
+        navs.push({
+          path: nav.path,
+          component: isGuide ? guideContext(docsPath).default : componentsContext(docsPath).default
+        });
+      }
+    }
+  });
+});
+
+let router = {
   mode: 'history',
   base: process.env.BASE_URL,
   routes: [
@@ -17,27 +35,9 @@ export default new Router({
       path: '/',
       name: 'home',
       component: Home,
-      children: [{
-        name: 'Button',
-        path: '/button',
-        component: button
-      }, {
-        name: 'Icon',
-        path: '/icon',
-        component: icon
-      }, {
-        name: 'Loading',
-        path: '/loading',
-        component: loading
-      }, {
-        name: 'Message',
-        path: '/message',
-        component: message
-      }, {
-        name: 'Clickoutside',
-        path: '/clickoutside',
-        component: clickoutside
-      }]
+      children: navs
     }
   ]
-});
+};
+
+export default new Router(router);
