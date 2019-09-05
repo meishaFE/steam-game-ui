@@ -28,7 +28,6 @@ Object.keys(navConfig).forEach(group => {
 });
 
 let router = {
-  mode: 'history',
   base: process.env.BASE_URL,
   routes: [
     {
